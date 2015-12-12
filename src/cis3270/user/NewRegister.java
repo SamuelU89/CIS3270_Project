@@ -16,6 +16,19 @@ public class NewRegister extends User {
 		//Creates a text box for first name
 		JTextField jtfFirstName = new JTextField("Type First Name Here");
 		
+		// Creates a label for last name
+		JLabel jlblLastName = new JLabel("Enter last name: ");
+		
+		// Creates a text box for first name
+		JTextField jtfLastName = new JTextField("Type Last Name Here");
+		
+		// Creates a label for address
+		JLabel jlblAddress = new JLabel("Enter address: ");
+				
+		// Creates a text box for first name
+		JTextField jtfAdress = new JTextField("Type Address Here");
+		
+		
 	}
 	
 }
