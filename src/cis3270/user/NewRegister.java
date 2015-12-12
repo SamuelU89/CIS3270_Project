@@ -58,6 +58,23 @@ public class NewRegister extends User {
 		// Creates a text box for Security Question
 		JTextField jtfSecurityQuestion = new JTextField("Type Security Question Here");
 		
+		// Creates a label for Security Answer
+		JLabel jlblSecurityAnswer = new JLabel("Enter Security Answer: ");
+						
+		// Creates a text box for first name
+		JTextField jtfSecurityAnswer = new JTextField("Type Security Answer Here");
+		
+		// Creates a label for username
+		JLabel jlblUsername = new JLabel("Enter Username: ");
+						
+		// Creates a text box for username
+		JTextField jtfUsername= new JTextField("Type Username Here");
+		
+		// Creates a label for password
+		JLabel jlblPassword = new JLabel("Enter Password: ");
+						
+		// Creates a text box for password
+		JTextField jtfPassword = new JTextField("Type Password Here");
 		
 	}
 	
