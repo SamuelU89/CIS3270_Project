@@ -11,6 +11,7 @@ public class Test {
 		
 		System.out.println("Fix test");
 		System.out.println("Hello");
+		System.out.println("Hi"); // Samuel U
 		
 		
 	}
