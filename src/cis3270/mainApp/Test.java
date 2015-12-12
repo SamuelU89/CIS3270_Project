@@ -10,6 +10,7 @@ public class Test {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		
 		System.out.println("Fix test");
+		System.out.println("Hello");
 		
 		
 	}
