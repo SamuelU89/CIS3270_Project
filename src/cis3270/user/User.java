@@ -205,6 +205,7 @@ public abstract class User implements dbModify {
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/mydb", 
 				"CIS3270", "Cis3270");
 		
+		System.out.println("Connection complete");
 		return connection;
 		} catch(Exception ex){
 			
@@ -212,6 +213,7 @@ public abstract class User implements dbModify {
 			
 		}
 		return null;
+		
 	}
 	
 	public void add() throws ClassNotFoundException, SQLException {
