@@ -1,5 +1,6 @@
 package cis3270.user; 
 
-public class NewRegister extends user {
+public class NewRegister extends User {
 
 
+}
