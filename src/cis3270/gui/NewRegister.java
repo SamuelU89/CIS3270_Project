@@ -1,5 +1,7 @@
-package cis3270.user; 
+package cis3270.gui; 
 import javax.swing.*;
+
+import cis3270.user.User;
 
 public class NewRegister extends User {
 	public static void main(String[] args) {

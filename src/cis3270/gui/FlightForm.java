@@ -1,4 +1,4 @@
-package cis3270.flight;
+package cis3270.gui;
 
 import java.awt.EventQueue;
 

@@ -19,4 +19,11 @@ public class Customer extends User {
 		setAdmin(admin);
 		
 	}
+	
+	public Customer(String username) {
+		
+		super(username);
+		
+		
+	}
 }

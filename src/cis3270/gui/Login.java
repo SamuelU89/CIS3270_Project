@@ -1,39 +1,21 @@
-package cis3270.user;
+package cis3270.gui;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+
+import cis3270.user.Customer;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JTextField;
 
-public class Login {
+public class Login extends JFrame {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTextField userNameInputBox;
 	private JTextField passwordInputBox;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Login window = new Login();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the application.
 	 */
@@ -89,7 +71,20 @@ public class Login {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					//the user logs in with this button
+					
+					Customer c1 = new Customer(userNameInputBox.getText());
+					c1.getInformation();
+					
+					if(c1.getPassword().equals(passwordInputBox.getText())) {
+						frame.setVisible(false);
+						frame = null;
+						MainUI mainUI = new MainUI();
+					} else {
+						
+						JOptionPane.showMessageDialog(null, "Invalid username or password", "Error", JOptionPane.INFORMATION_MESSAGE);
+						
+					}
+				
 				}
 				catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "Invalid username or password");
@@ -107,5 +102,9 @@ public class Login {
 		});
 		btnRegister.setBounds(582, 306, 124, 33);
 		frame.getContentPane().add(btnRegister);
+
 	}
+	
 }
+
+

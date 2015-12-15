@@ -1,6 +1,9 @@
 package cis3270.user;
 
 import java.sql.*;
+
+import javax.swing.*;
+
 import cis3270.database.dbModify;
 
 public abstract class User implements dbModify {
@@ -196,6 +199,49 @@ public abstract class User implements dbModify {
 		return admin;
 		
 	}
+	
+	public void getInformation() throws SQLException, ClassNotFoundException{
+		
+		Connection connection = initializeDB();
+		try{
+			
+		Statement statement = connection.createStatement();
+		
+		String queryString = "select firstName, lastName, address, zip, "
+				+ "state, email, ssn, securityQuestion, securityAnswer, username, password, admin" 
+				+ " from User"
+				+ " where username = '" + getUsername() + "'";
+		
+		ResultSet rs = statement.executeQuery(queryString);
+		
+		if (!rs.next()) {
+			
+			//JOptionPane.showMessageDialog(null, "Invalid Login", "Error", JOptionPane.INFORMATION_MESSAGE);
+			
+		} else {
+			
+			setFirstName(rs.getString(1));
+			setLastName(rs.getString(2));
+			setAddress(rs.getString(3));
+			setZip(rs.getInt(4));
+			setState(rs.getString(5));
+			setEmail(rs.getString(6));
+			setSSN(rs.getInt(7));
+			setSecurityQuestion(rs.getString(8));
+			setSecurityAnswer(rs.getString(9));
+			setPassword(rs.getString(11));
+			setAdmin(rs.getInt(12));
+			
+		}
+		
+		} catch(Exception ex){
+			
+			ex.printStackTrace();
+			
+		}
+		
+	}
+	
 	public Connection initializeDB() throws SQLException, ClassNotFoundException{
 		
 		try {
