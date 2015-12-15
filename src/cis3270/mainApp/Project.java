@@ -13,7 +13,7 @@ public class Project {
 	
 	public static void main(String[] args) {
 		
-		Splash splash = new Splash("C:\\Users\\xakai77x\\workspace\\cis3270_Project\\image\\splash.jpg", new JFrame());
+		Splash splash = new Splash("src\\cis3270\\image\\splash.jpg", new JFrame(), 1000);
 		splash.setVisible(true);
 		
 		Login window;

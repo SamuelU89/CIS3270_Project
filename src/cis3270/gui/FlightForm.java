@@ -99,7 +99,7 @@ public class FlightForm extends Flight {
 				Timestamp timestamp2 = null;
 				try {
 					parsedDate = dateFormat.parse(enterDepart.getText());
-					parsedDate2 = dateFormat.parse(enterArrive.getText());
+					parsedDate2 = dateFormat2.parse(enterArrive.getText());
 					
 					timestamp = new java.sql.Timestamp(parsedDate.getTime());
 					timestamp2 = new java.sql.Timestamp(parsedDate2.getTime());

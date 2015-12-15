@@ -6,12 +6,13 @@ import java.sql.*;
 
 import javax.swing.*;
 
+import cis3270.gui.MainUI;
 import cis3270.user.Customer;
 
 public class ListFlight extends Flight{
 
 	Customer c1;
-	private PreparedStatement preparedStatement;
+	//private PreparedStatement preparedStatement;
 	public JFrame fFrame;
 	
 	/**
@@ -45,6 +46,7 @@ public class ListFlight extends Flight{
 			public void actionPerformed(ActionEvent e) {
 				
 				fFrame.setVisible(false);
+				new MainUI(c1);
 			
 			}
 		});

@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import cis3270.user.Customer;
-import cis3270.user.User;
 
 /**
  * This class is used to find forgotten password

@@ -1,7 +1,5 @@
 package cis3270.gui;
 
-import java.awt.EventQueue;
-
 import javax.swing.*;
 
 import cis3270.user.Customer;
@@ -89,7 +87,7 @@ public class Login extends JFrame {
 					if(c1.getPassword().equals(passwordInputBox.getText())) {
 						frame.setVisible(false);
 						frame = null;
-						MainUI mainUI = new MainUI(c1);
+						new MainUI(c1);
 					} else {
 						
 						JOptionPane.showMessageDialog(null, "Invalid username or password", "Error", JOptionPane.INFORMATION_MESSAGE);
@@ -113,7 +111,7 @@ public class Login extends JFrame {
 					
 					frame.setVisible(false);
 					frame = null;
-					NewRegister registerForm = new NewRegister();
+					new NewRegister();
 					
 				} catch (Exception e1) {
 					

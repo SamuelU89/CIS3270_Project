@@ -36,6 +36,7 @@ public class MainUI extends JFrame{
 				try {
 					
 					ListFlight flight = new ListFlight(c1);
+					mainUI.setVisible(false);
 					
 				} catch (Exception e1) {
 					

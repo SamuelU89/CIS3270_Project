@@ -6,7 +6,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Splash extends JWindow {
-    public Splash(String filename, Frame f)
+    public Splash(String filename, Frame f, int waitTime)
     {
         super(f);
         JLabel l = new JLabel(new ImageIcon(filename));
