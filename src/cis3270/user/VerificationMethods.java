@@ -1,16 +1,13 @@
 package cis3270.user;
 
 public class VerificationMethods {
-	
-	public static void main(String [] args) {
-		
-		Vars varsObject = new Vars();
-		String email = varsObject.getEmail();
-		String state = varsObject.getEmail();
-		String zip = varsObject.getEmail();
-		
-		
-	}
+
+	/**
+	 * 
+	 * 
+	 * These methods will be used later to validate inputs
+	 * 
+	 */
 	
 	public boolean email (String email) {
 		
@@ -39,12 +36,13 @@ public class VerificationMethods {
 		else 
 			return false;
 			
-		}
-	            
+		}     
 	
 	public void zipcode(String zip) {
 		if(zip.matches("\\d{5}")) {
 			System.out.println("Zipcode is valid");
 		}
+
+
 	}
 }
