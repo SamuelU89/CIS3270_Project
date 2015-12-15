@@ -12,21 +12,27 @@ public class Flight {
 	private int idPlane;
 	private String flightFrom;
 	private String flightTo;
-	private String flightDeparture;
-	private String flightArrival;
+	private Timestamp flightDeparture;
+	private Timestamp flightArrival;
 
 	public Flight() {
 		
 	}
 	
-	public Flight(int idFlight, int idPlane, String flightFrom, String flightTo, String flightDeparture, String flightArrival) {
+	public Flight(int idFlight) {
+		
+		this.idFlight = idFlight;
+		
+	}
+	
+	public Flight(int idFlight, int idPlane, String flightFrom, String flightTo, Timestamp flightDeparture, Timestamp flightArrival) {
 		
 		setIdFlight(idFlight);
 		setIdPlane(idPlane);
 		setFlightFrom(flightFrom);
 		setFlightTo(flightTo);
-		setFlightDeparture(flightDeparture);
-		setFlightArrival(flightArrival);
+		//setFlightDeparture(flightDeparture);
+		//setFlightArrival(flightArrival);
 		
 	}
 	
@@ -73,27 +79,32 @@ public class Flight {
 		return flightTo;
 	}
 	
-	public void setFlightDeparture(String flightDeparture) {
+	public void setFlightDeparture(Timestamp flightDeparture) {
 		
-		this.flightDeparture = flightDeparture;
+		if (flightDeparture != null) { 
+			this.flightDeparture = flightDeparture; 
+			}
+
 	}
 	
-	public String getFlightDeparture() {
+	public Timestamp getFlightDeparture() {
 		
 		return flightDeparture;
 	}
 	
-	public void setFlightArrival(String flightArrival) {
+	public void setFlightArrival(Timestamp flightArrival) {
 		
-		this.flightArrival = flightArrival;
+		if (flightArrival != null) { 
+			this.flightArrival = flightArrival; 
+			}
 	}
 	
-	public String getFlightArrival() {
+	public Timestamp getFlightArrival() {
 		
 		return flightArrival;
 	}
 
-public Connection initializeDB() throws SQLException, ClassNotFoundException{
+	public Connection initializeDB() throws SQLException, ClassNotFoundException{
 		
 		try {
 		Class.forName("com.mysql.jdbc.Driver");
@@ -127,8 +138,8 @@ public Connection initializeDB() throws SQLException, ClassNotFoundException{
 		preparedStatement.setInt(2, getIdPlane());
 		preparedStatement.setString(3, getFlightFrom());
 		preparedStatement.setString(4, getFlightTo());
-		preparedStatement.setString(5, getFlightDeparture());
-		preparedStatement.setString(6, getFlightArrival());
+		//preparedStatement.setTimestamp(5, getFlightDeparture());
+		//preparedStatement.setString(6, getFlightArrival());
 		
 		preparedStatement.executeUpdate();
 		
@@ -157,6 +168,47 @@ public Connection initializeDB() throws SQLException, ClassNotFoundException{
 	public void update() throws ClassNotFoundException, SQLException{
 		
 		initializeDB();
+		
+	}
+	
+	public void getInformation() throws SQLException, ClassNotFoundException{
+		
+		Connection connection = initializeDB();
+		try{
+			
+		Statement statement = connection.createStatement();
+		
+		String queryString = "select a.idFlight, a.idPlane, a.flightFrom, a.flightTo, "
+				+ " a.flightDeparture, a.flightArrival " 
+				+ " from Flight a"
+				+ " where idFlight = '" + getIdFlight() + "'";
+		
+		ResultSet rs = statement.executeQuery(queryString);
+		
+		if (!rs.next()) {
+			
+			//JOptionPane.showMessageDialog(null, "Invalid Login", "Error", JOptionPane.INFORMATION_MESSAGE);
+			
+		} else {
+			
+			setIdFlight(rs.getInt(1));
+			setIdPlane(rs.getInt(2));
+			setFlightFrom(rs.getString(3));
+			setFlightTo(rs.getString(4));
+			setFlightDeparture(rs.getTimestamp(5));
+			setFlightArrival(rs.getTimestamp(6));
+			
+		}
+		
+		} catch(Exception ex){
+			
+			ex.printStackTrace();
+			
+		} finally {
+			
+			connection.close();
+			
+		}
 		
 	}
 }

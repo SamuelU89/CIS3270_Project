@@ -7,17 +7,20 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import cis3270.flight.ListFlight;
+import cis3270.flight.ShowFlight;
+import cis3270.user.Customer;
 
 public class MainUI extends JFrame{
 
+	Customer c1;
 	public JFrame mainUI;
 	private JButton listFlights = new JButton("List Flight");
 	private JButton myFlights = new JButton("My Flights");
 	private JButton logout = new JButton("Logout");
 	private JButton addUpdateFlight = new JButton("Add/Update Flight");
 	
-	
-	public MainUI() {
+	public MainUI(Customer c1) {
+		this.c1 = c1;
 		initialize();
 	}
 	
@@ -32,7 +35,7 @@ public class MainUI extends JFrame{
 				
 				try {
 					
-					ListFlight flight = new ListFlight();
+					ListFlight flight = new ListFlight(c1);
 					
 				} catch (Exception e1) {
 					
@@ -44,6 +47,26 @@ public class MainUI extends JFrame{
 		
 		mainPanel.add(myFlights);
 		myFlights.setPreferredSize(new Dimension(200, 80));
+		myFlights.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				ShowFlight window;
+				
+				try {
+				/**
+				 * This is running the ShowFlight page from cis3270.gui.ShowFlight;
+				 */
+					window = new ShowFlight(c1);
+					//System.out.println(c1.getUsername()); testing to see if object is passing through;
+					mainUI.setVisible(false);
+				
+				} catch (Exception ex) {
+					ex.printStackTrace();
+					
+				}	
+				
+			}
+		});
 		
 		mainPanel.add(logout);
 		logout.setPreferredSize(new Dimension(200, 80));
@@ -81,7 +104,7 @@ public class MainUI extends JFrame{
 				 * This is running the FlightForm page from cis3270.gui.FlightForm;
 				 * @Samuel U
 				 */
-					window = new FlightForm();
+					window = new FlightForm(c1);
 					window.fForm.setVisible(true);
 					mainUI.setVisible(false);
 				

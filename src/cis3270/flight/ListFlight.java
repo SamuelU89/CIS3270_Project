@@ -6,15 +6,19 @@ import java.sql.*;
 
 import javax.swing.*;
 
+import cis3270.user.Customer;
+
 public class ListFlight extends Flight{
 
+	Customer c1;
 	private PreparedStatement preparedStatement;
 	public JFrame fFrame;
 	
 	/**
 	 * Create the application.
 	 */
-	public ListFlight() {
+	public ListFlight(Customer c1) {
+		this.c1 = c1;
 		initialize();
 	}
 	
@@ -28,15 +32,6 @@ public class ListFlight extends Flight{
 		JButton book = new JButton("Book");
 		mainPanel.add(book);
 		book.setPreferredSize(new Dimension(200, 80));
-		book.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			
-				
-				
-				
-			
-			}
-		});
 		
 		JTextField enterFlightNum = new JTextField("Enter Flight Number");
 		enterFlightNum.setColumns(10);
@@ -53,6 +48,22 @@ public class ListFlight extends Flight{
 			
 			}
 		});
+		
+		book.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				try{
+					c1.bookFlight(Integer.parseInt(enterFlightNum.getText()));;
+				}
+				catch (Exception ex) {
+					
+					ex.printStackTrace();
+					
+				}
+				
+			}
+		});
+		
 		
 		JPanel mainPanel2 = new JPanel();
 		JLabel listFlights = new JLabel();
@@ -110,40 +121,6 @@ public class ListFlight extends Flight{
 		
 	}
 	
-	public void bookFlight() 
-			throws SQLException, ClassNotFoundException{
-		
-		Connection connection = initializeDB();
-		
-		try{
-			String queryString = "insert into Flight(idFlight, username)"
-					+ "values(?,?)";
-			
-			preparedStatement = connection.prepareStatement(queryString);
-			
-			preparedStatement.setString(1, Integer.parseInt(enterFlightNum.getText());
-			preparedStatement.setString(2, c1.getUsername());
-			
-			preparedStatement.executeUpdate();
-			
-			} catch(SQLException ex){
-				
-				ex.printStackTrace();
-				
-			} catch(Exception ex) {
-				
-				ex.printStackTrace();
-				
-			} finally {
-				
-				connection.close();
-				
-			}
-		
-		
-		
-		
-	}
 }
 	
 		

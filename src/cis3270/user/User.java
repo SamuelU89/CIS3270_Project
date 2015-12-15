@@ -2,9 +2,11 @@ package cis3270.user;
 
 import java.sql.*;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 import cis3270.database.dbModify;
+import cis3270.flight.Flight;
+import cis3270.flight.Plane;
 
 public abstract class User implements dbModify {
 
@@ -313,6 +315,171 @@ public abstract class User implements dbModify {
 		
 	}
 	
+	public String getFlight() throws ClassNotFoundException, SQLException {
+		
+		String labelText = "<html>";
+		Connection connection = initializeDB();
+		try{
+			
+			Statement statement = connection.createStatement();
+			
+			String queryString = "select b.planeNum, b.airlineName, a.flightFrom, a.flightTo, a.flightDeparture, a.flightArrival, b.capacity " 
+					+ "from flight a left join plane b "
+					+ " on a.idPlane = b.idPlane "
+					+ " right join reserve c "
+					+ " on a.idFlight = c.idFlight "
+					+ " where c.username = '" + getUsername() +"'";
+			
+			ResultSet rs = statement.executeQuery(queryString);
+			
+			while(rs.next()) {
+				
+				
+				labelText = labelText + rs.getString(1) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5)
+						+ " " + rs.getString(6) + " " + rs.getString(7) + "<br>";
+			}
+		
+		} catch (SQLException ex) {
+			
+			ex.printStackTrace();
+			
+		} catch(Exception ex){
+			
+			ex.printStackTrace();
+			
+		} finally {
+			
+			connection.close();
+			
+		}
+		labelText = labelText + "</HTML>";
+		return labelText;
+	}
+	
+	public void bookFlight(int idFlight) throws SQLException, ClassNotFoundException {
+		Flight book = new Flight(idFlight);
+		book.getInformation();
+		
+		int capacity = Plane.getCapacity(book.getIdPlane());
+		
+		Connection connection = initializeDB();
+		
+		int bookedFlights = 0;
+		try{
+			
+			Statement statement = connection.createStatement();
+			
+			String queryString = "select count(*) "
+					+ " from reserve "
+					+ " where idFlight = '" + book.getIdFlight() +"'";
+			
+			ResultSet rs = statement.executeQuery(queryString);
+			
+			if(rs.next()) {
+				
+				bookedFlights = rs.getInt(1);
+
+			}
+		
+		} catch (SQLException ex) {
+			
+			ex.printStackTrace();
+			
+		} catch(Exception ex){
+			
+			ex.printStackTrace();
+			
+		} finally {
+			
+			connection.close();
+			
+		}
+		/** This check overcapacity */
+		if (bookedFlights > capacity) {
+			
+			JOptionPane.showMessageDialog(null, "Over capacity");
+			
+		} 
+		/** This checks time constraints */
+		else {
+			connection = initializeDB();
+			
+			Flight f1;
+			
+			boolean conflict = false;
+			ResultSet rs = null;
+			try{
+				
+				Statement statement = connection.createStatement();
+				
+				String queryString = "select idFlight " 
+						+ "from reserve "
+						+ " where username = '" + getUsername() +"'";
+				
+				rs = statement.executeQuery(queryString);
+			} catch (SQLException ex) {
+				
+				ex.printStackTrace();
+				
+			} catch(Exception ex){
+				
+				ex.printStackTrace();
+				
+			} 
+			
+			while(rs.next() && conflict == false) {
+					
+				f1 = new Flight(rs.getInt(1)); 
+				f1.getInformation();
+				if((f1.getFlightDeparture().after(book.getFlightDeparture()) && 
+						f1.getFlightDeparture().before(book.getFlightArrival())) || (f1.getFlightArrival().after(book.getFlightDeparture()) && 
+						f1.getFlightArrival().before(book.getFlightArrival()))) {
+					
+					JOptionPane.showMessageDialog(null, "Time constraint");
+					conflict = true;
+					
+					
+					
+				} 
+				
+			}
+				
+			if(conflict == false) {
+				connection = initializeDB();
+				try{
+				String queryString = "insert into reserve(idFlight, username) "
+						+ "values(?,?)";
+				
+				preparedStatement = connection.prepareStatement(queryString);
+				
+				preparedStatement.setInt(1, book.getIdFlight());
+				preparedStatement.setString(2, getUsername());
+				
+				preparedStatement.executeUpdate();
+				JOptionPane.showMessageDialog(null, "Booked!");
+				
+				} catch(SQLException ex){
+					
+					ex.printStackTrace();
+					
+				} catch(Exception ex) {
+					
+					ex.printStackTrace();
+					
+				} finally {
+					
+					connection.close();
+					
+				}
+			}
+					
+				
+			
+			
+		}
+		
+	}
+	
 	public void delete() throws ClassNotFoundException, SQLException{
 		
 		initializeDB();
@@ -323,5 +490,6 @@ public abstract class User implements dbModify {
 		
 		initializeDB();
 		
-	}
+	}	
+	
 }

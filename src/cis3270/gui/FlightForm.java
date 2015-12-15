@@ -15,6 +15,7 @@ import cis3270.user.Customer;
  */
 public class FlightForm extends Flight {
 
+	Customer c1;
 	public JFrame fForm;
 	private JLabel flightID, planeID, flightTo, flightFrom, depart, arrive;
 	private JTextField enterFID, enterPID, enterFTo, enterFFrom, enterDepart, enterArrive;
@@ -24,8 +25,9 @@ public class FlightForm extends Flight {
 	GridLayout g1, g2;
 	FlowLayout f1;
 	
-	public FlightForm() {
+	public FlightForm(Customer c1) {
 		
+		this.c1 = c1;
 		initialize();
 		
 	}
@@ -84,7 +86,7 @@ public class FlightForm extends Flight {
 			public void actionPerformed(ActionEvent e) {
 				
 				Flight f1 =  new Flight(Integer.parseInt(enterFID.getText()), Integer.parseInt(enterPID.getText()), enterFTo.getText(), 
-						enterFFrom.getText(), enterDepart.getText(), enterArrive.getText());
+						enterFFrom.getText(), enterDepart.getTimestamp(), enterArrive.getTimestamp());
 				
 				try {
 					
@@ -112,7 +114,7 @@ public class FlightForm extends Flight {
 				
 				try {
 
-					window = new MainUI();
+					window = new MainUI(c1);
 					window.mainUI.setVisible(true);
 					fForm.setVisible(false);
 				

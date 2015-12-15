@@ -89,7 +89,7 @@ public class Login extends JFrame {
 					if(c1.getPassword().equals(passwordInputBox.getText())) {
 						frame.setVisible(false);
 						frame = null;
-						MainUI mainUI = new MainUI();
+						MainUI mainUI = new MainUI(c1);
 					} else {
 						
 						JOptionPane.showMessageDialog(null, "Invalid username or password", "Error", JOptionPane.INFORMATION_MESSAGE);
