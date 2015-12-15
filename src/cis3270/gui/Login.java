@@ -64,6 +64,7 @@ public class Login extends JFrame {
 			}
 		});
 		btnForgotPassword.setBounds(582, 361, 124, 33);
+		btnForgotPassword.setSize(200,50);
 		frame.getContentPane().add(btnForgotPassword);
 		
 		JButton btnLogin = new JButton("Login");
@@ -92,15 +93,27 @@ public class Login extends JFrame {
 			}
 		});
 		btnLogin.setBounds(227, 345, 286, 56);
+		btnLogin.setSize(200,50);
 		frame.getContentPane().add(btnLogin);
 		
 		JButton btnRegister = new JButton("Register");
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//the user can register with this button
+				try {
+					
+					frame.setVisible(false);
+					frame = null;
+					NewRegister registerForm = new NewRegister();
+					
+				} catch (Exception e1) {
+					
+					JOptionPane.showMessageDialog(null, "Error");
+					
+				}
 			}
 		});
 		btnRegister.setBounds(582, 306, 124, 33);
+		btnRegister.setSize(200,50);
 		frame.getContentPane().add(btnRegister);
 
 	}

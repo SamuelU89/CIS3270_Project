@@ -1,85 +1,99 @@
 package cis3270.gui; 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 import cis3270.user.User;
-
+ /**
+  * this is the form for new users
+  * @author xakai77x
+  *
+  */
 public class NewRegister extends User {
-	public static void main(String[] args) {
 		
-		// Creates a button that says "OK"
-		JButton jbtOK = new JButton("OK");
-		
-		// Creates a button that says "Cancel"
-		JButton jbtCancel = new JButton("Cancel");
-		
-		//Creates a label for first name
-		JLabel jlblFirstName = new JLabel("Enter first name: ");
-		
-		//Creates a text box for first name
-		JTextField jtfFirstName = new JTextField("Type First Name Here");
-		
-		// Creates a label for last name
-		JLabel jlblLastName = new JLabel("Enter last name: ");
-		
-		// Creates a text box for first name
-		JTextField jtfLastName = new JTextField("Type Last Name Here");
-		
-		// Creates a label for address
-		JLabel jlblAddress = new JLabel("Enter address: ");
-				
-		// Creates a text box for first name
-		JTextField jtfAddress = new JTextField("Type Address Here");
-		
-		// Creates a label for state
-		JLabel jlblState = new JLabel("Enter State: ");
-						
-		// Creates a text box for first name
-		JTextField jtfState = new JTextField("Type State Here");
-		
-		// Creates a label for Zip Code
-		JLabel jlblZipCode = new JLabel("Enter Zip code: ");
-						
-		// Creates a text box for Zip Code
-		JTextField jtfZipCode = new JTextField("Type Zip Code Here");
-		
-		// Creates a label for email
-		JLabel jlblEmail = new JLabel("Enter Email: ");
-						
-		// Creates a text box for first name
-		JTextField jtfEmail = new JTextField("Type Email Here");
-		
-		// Creates a label for ssn
-		JLabel jlblSsn = new JLabel("Enter SSN: ");
-						
-		// Creates a text box for SSN
-		JTextField jtfSsn = new JTextField("Type SSN Here");
-		
-		// Creates a label for Security Question
-		JLabel jlblSecurityQuestion = new JLabel("Enter Security Question: ");
-						
-		// Creates a text box for Security Question
-		JTextField jtfSecurityQuestion = new JTextField("Type Security Question Here");
-		
-		// Creates a label for Security Answer
-		JLabel jlblSecurityAnswer = new JLabel("Enter Security Answer: ");
-						
-		// Creates a text box for first name
-		JTextField jtfSecurityAnswer = new JTextField("Type Security Answer Here");
-		
-		// Creates a label for username
-		JLabel jlblUsername = new JLabel("Enter Username: ");
-						
-		// Creates a text box for username
-		JTextField jtfUsername= new JTextField("Type Username Here");
-		
-		// Creates a label for password
-		JLabel jlblPassword = new JLabel("Enter Password: ");
-						
-		// Creates a text box for password
-		JTextField jtfPassword = new JTextField("Type Password Here");
-		
+	public JFrame newReg;
+	private JLabel firstName = new JLabel("First Name: ");
+	private JLabel lastName = new JLabel("Last Name: ");
+	private JLabel address = new JLabel("Address: ");
+	private JLabel zip = new JLabel("Zip: ");
+	private JLabel state = new JLabel("State: ");
+	private JLabel email = new JLabel("Email: ");
+	private JLabel ssn = new JLabel("SSN: ");
+	private JLabel securityQuestion = new JLabel("Security Question: ");
+	private JLabel securityAnswer = new JLabel("Security Answer: ");
+	private JLabel username = new JLabel("Username: ");
+	private JLabel password = new JLabel("Password: ");
+	private JLabel admin = new JLabel("Enter first name: ");
+	
+	private JTextField enterFName = new JTextField();	
+	private JTextField enterLName = new JTextField();
+	private JTextField enterAddress = new JTextField();
+	private JTextField enterZip = new JTextField();
+	private JTextField enterState = new JTextField();
+	private JTextField enterEmail = new JTextField();
+	private JTextField enterSSN = new JTextField();
+	private JTextField enterQuestion = new JTextField();
+	private JTextField enterAnswer = new JTextField();
+	private JTextField enterUsername = new JTextField();
+	private JTextField enterPassword = new JTextField();
+	
+	public NewRegister() {
+		initialize();
 	}
 	
+	private void initialize() {
+		newReg = new JFrame();
+		newReg.setSize(1000, 800);
+		newReg.setResizable(false);
+		newReg.setLocationRelativeTo(null);
+		newReg.setVisible(true);
+		newReg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		newReg.add(firstName);
+		newReg.add(enterFName);
+		newReg.add(lastName);
+		newReg.add(enterLName);
+		newReg.add(address);
+		newReg.add(enterAddress);
+		newReg.add(zip);
+		newReg.add(enterZip);
+		newReg.add(state);
+		newReg.add(enterState);
+		newReg.add(email);
+		newReg.add(enterEmail);
+		newReg.add(ssn);
+		newReg.add(enterSSN);
+		newReg.add(securityQuestion);
+		newReg.add(enterQuestion);
+		newReg.add(securityAnswer);
+		newReg.add(enterAnswer);
+		newReg.add(username);
+		newReg.add(enterUsername);
+		newReg.add(password);
+		newReg.add(enterPassword);
+		
+		JButton setRegister = new JButton("OK");
+		setRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//the user can request his or her password with this button
+			}
+		});
+		newReg.getContentPane().add(setRegister);
+		
+		JButton cancelRegister = new JButton("Cancel");
+		cancelRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//the user can request his or her password with this button
+			}
+		});
+		newReg.getContentPane().add(cancelRegister);
+	
+	
+	
+	
+	}
+
 }
 
 

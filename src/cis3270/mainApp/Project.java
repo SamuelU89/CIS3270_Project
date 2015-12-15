@@ -25,16 +25,6 @@ public class Project {
 			
 		}	 
 		
-		
-		/*if (isValidLogin()) {
-			
-			window.frame.setVisible(false);
-			window = null;
-			MainUI mainUI = new MainUI();
-			
-		}
-	*/
-
 	}
 	
 	}
