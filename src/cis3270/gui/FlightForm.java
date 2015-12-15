@@ -1,140 +1,138 @@
 package cis3270.gui;
 
-import java.awt.EventQueue;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.SQLException;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.*;
 
-public class FlightForm {
+import cis3270.flight.Flight;
+import cis3270.user.Customer;
+/**
+ * This class is for the flight form. This is where admins can add flight information.
+ * @author xakai77x
+ *
+ */
+public class FlightForm extends Flight {
 
-	private JFrame frame;
-	private JTextField textFieldFlightID;
-	private JTextField textFieldPlaneID;
-	private JTextField textFieldFlightFrom;
-	private JTextField textFieldFlightTo;
-	private JTextField textFieldDepartureTime;
-	private JTextField textFieldArrivalTime;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FlightForm window = new FlightForm();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
+	public JFrame fForm;
+	private JLabel flightID, planeID, flightTo, flightFrom, depart, arrive;
+	private JTextField enterFID, enterPID, enterFTo, enterFFrom, enterDepart, enterArrive;
+	private JButton addFlight, cancelAdd;
+	
+	JPanel p1, p2;
+	GridLayout g1, g2;
+	FlowLayout f1;
+	
 	public FlightForm() {
+		
 		initialize();
+		
 	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 934, 803);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
 		
-		JLabel lblTitle = new JLabel("Flight Form for Administrator");
-		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 28));
-		lblTitle.setBounds(263, 44, 417, 70);
-		frame.getContentPane().add(lblTitle);
+		fForm = new JFrame();
+		fForm.setSize(1000, 800);
+		fForm.setResizable(false);
+		fForm.setLocationRelativeTo(null);
+		fForm.setVisible(true);
+		fForm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JLabel lblFlightId = new JLabel("Flight ID:");
-		lblFlightId.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblFlightId.setBounds(137, 145, 79, 28);
-		frame.getContentPane().add(lblFlightId);
+		flightID = new JLabel("Flight ID: ");
+		planeID = new JLabel("Plane ID: ");
+		flightTo = new JLabel("To: ");
+		flightFrom = new JLabel("From: ");
+		depart = new JLabel("Departure Time: ");
+		arrive = new JLabel("Arrival Time: ");
 		
-		JLabel lblPlaneId = new JLabel("Plane ID:");
-		lblPlaneId.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblPlaneId.setBounds(137, 227, 79, 28);
-		frame.getContentPane().add(lblPlaneId);
+		enterFID = new JTextField("FID");
+		enterPID = new JTextField("PID");
+		enterFTo = new JTextField("To(City, State)");
+		enterFFrom = new JTextField("From(City, State)");
+		enterDepart = new JTextField("YYYY-MM-DD HH-MM-SS");
+		enterArrive = new JTextField("YYYY-MM-DD HH-MM-SS");
 		
-		JLabel lblFlightFrom = new JLabel("Flight From:");
-		lblFlightFrom.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblFlightFrom.setBounds(113, 307, 103, 28);
-		frame.getContentPane().add(lblFlightFrom);
+		addFlight = new JButton("Add");
+		cancelAdd = new JButton("Cancel");
 		
-		JLabel lblFlightTo = new JLabel("Flight To:");
-		lblFlightTo.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblFlightTo.setBounds(127, 384, 89, 28);
-		frame.getContentPane().add(lblFlightTo);
+		p1 = new JPanel();
+		p2 = new JPanel();
 		
-		JLabel lblDepartureTime = new JLabel("Departure Time:");
-		lblDepartureTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblDepartureTime.setBounds(82, 460, 134, 28);
-		frame.getContentPane().add(lblDepartureTime);
+		g1 = new GridLayout(22,1);
+		g2 = new GridLayout(1,1);
 		
-		JLabel lblArrivalTime = new JLabel("Arrival Time:");
-		lblArrivalTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblArrivalTime.setBounds(113, 534, 103, 33);
-		frame.getContentPane().add(lblArrivalTime);
+		f1 = new FlowLayout();
 		
-		textFieldFlightID = new JTextField();
-		textFieldFlightID.setBounds(244, 146, 163, 33);
-		frame.getContentPane().add(textFieldFlightID);
-		textFieldFlightID.setColumns(10);
+		p1.setLayout(g1);
+		p1.add(flightID);
+		p1.add(enterFID);
+		p1.add(planeID);
+		p1.add(enterPID);
+		p1.add(flightTo);
+		p1.add(enterFTo);
+		p1.add(flightFrom);
+		p1.add(enterFFrom);
+		p1.add(depart);
+		p1.add(enterDepart);
+		p1.add(arrive);
+		p1.add(enterArrive);
 		
-		textFieldPlaneID = new JTextField();
-		textFieldPlaneID.setColumns(10);
-		textFieldPlaneID.setBounds(244, 228, 163, 33);
-		frame.getContentPane().add(textFieldPlaneID);
-		
-		textFieldFlightFrom = new JTextField();
-		textFieldFlightFrom.setColumns(10);
-		textFieldFlightFrom.setBounds(244, 308, 283, 33);
-		frame.getContentPane().add(textFieldFlightFrom);
-		
-		textFieldFlightTo = new JTextField();
-		textFieldFlightTo.setColumns(10);
-		textFieldFlightTo.setBounds(244, 384, 283, 33);
-		frame.getContentPane().add(textFieldFlightTo);
-		
-		textFieldDepartureTime = new JTextField();
-		textFieldDepartureTime.setColumns(10);
-		textFieldDepartureTime.setBounds(244, 461, 163, 33);
-		frame.getContentPane().add(textFieldDepartureTime);
-		
-		textFieldArrivalTime = new JTextField();
-		textFieldArrivalTime.setColumns(10);
-		textFieldArrivalTime.setBounds(244, 537, 163, 33);
-		frame.getContentPane().add(textFieldArrivalTime);
-		
-		JButton btnSubmit = new JButton("Submit");
-		btnSubmit.addActionListener(new ActionListener() {
+		p2.setLayout(g2);
+		p2.add(addFlight);
+		addFlight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//the submit button submits the form
+				
+				Flight f1 =  new Flight(Integer.parseInt(enterFID.getText()), Integer.parseInt(enterPID.getText()), enterFTo.getText(), 
+						enterFFrom.getText(), enterDepart.getText(), enterArrive.getText());
+				
+				try {
+					
+					f1.add();
+					
+				} catch(SQLException ex){
+					
+					JOptionPane.showMessageDialog(null, "Flight ID already exists!");
+					ex.printStackTrace();
+					
+				} catch(Exception ex) {
+					
+					ex.printStackTrace();
+					
+				}
+				
 			}
 		});
-		btnSubmit.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSubmit.setBounds(244, 629, 210, 48);
-		frame.getContentPane().add(btnSubmit);
 		
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e1) {
-				//the cancel button cancels the form
+		p2.add(cancelAdd);
+		cancelAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				MainUI window;
+				
+				try {
+
+					window = new MainUI();
+					window.mainUI.setVisible(true);
+					fForm.setVisible(false);
+				
+				} catch (Exception ex) {
+					ex.printStackTrace();
+					
+				}	
+				
 			}
 		});
-		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCancel.setBounds(555, 629, 210, 48);
-		frame.getContentPane().add(btnCancel);
+		
+		fForm.setLayout(g2);
+		fForm.add(p1);
+		fForm.add(p2);
+		fForm.setSize(1000, 800);
+		fForm.setVisible(true);
+		
+		
+		
+		
 	}
+	
 }

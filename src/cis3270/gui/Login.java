@@ -13,7 +13,7 @@ import java.awt.Font;
 public class Login extends JFrame {
 
 	public JFrame frame;
-	private JTextField userNameInputBox;
+	protected JTextField userNameInputBox;
 	private JTextField passwordInputBox;
 	
 	/**
@@ -60,7 +60,17 @@ public class Login extends JFrame {
 		JButton btnForgotPassword = new JButton("Forgot Password?");
 		btnForgotPassword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//the user can request his or her password with this button
+				try {
+					
+					frame.setVisible(false);
+					frame = null;
+					ForgotPassword lookupPass = new ForgotPassword();
+					
+				} catch (Exception e1) {
+					
+					JOptionPane.showMessageDialog(null, "Error");
+					
+				}
 			}
 		});
 		btnForgotPassword.setBounds(582, 361, 124, 33);

@@ -1,9 +1,7 @@
 package cis3270.gui; 
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
-
 import cis3270.user.Customer;
 import cis3270.user.User;
  /**
@@ -11,7 +9,7 @@ import cis3270.user.User;
   * @author xakai77x
   *
   */
-public class NewRegister extends JFrame {
+public class NewRegister {
 		
 	public JFrame newReg;
 	private JLabel firstName, lastName, address, zip, state, email, ssn, 
@@ -21,7 +19,6 @@ public class NewRegister extends JFrame {
 	private JButton setRegister, cancelRegister;
 	JPanel p1, p2;
 	GridLayout g1, g2;
-	BorderLayout b1;
 	FlowLayout f1;
 	
 	public NewRegister() {
@@ -70,8 +67,6 @@ public class NewRegister extends JFrame {
 		
 		g1 = new GridLayout(22,1);
 		g2 = new GridLayout(1,1);
-		
-		b1 = new BorderLayout();
 		
 		f1 = new FlowLayout();
 		

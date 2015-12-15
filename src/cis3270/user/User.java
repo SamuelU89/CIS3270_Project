@@ -56,6 +56,7 @@ public abstract class User implements dbModify {
 		
 	}
 	
+	
 	public void setFirstName(String firstName) {
 		
 		this.firstName = firstName;
@@ -238,6 +239,10 @@ public abstract class User implements dbModify {
 			
 			ex.printStackTrace();
 			
+		} finally {
+			
+			connection.close();
+			
 		}
 		
 	}
@@ -253,11 +258,16 @@ public abstract class User implements dbModify {
 		
 		System.out.println("Connection complete");
 		return connection;
-		} catch(Exception ex){
+		} catch(SQLException ex){
 			
 			ex.printStackTrace();
 			
-		}
+		} catch(Exception ex) {
+			
+			ex.printStackTrace();
+			
+		} 
+		
 		return null;
 		
 	}
@@ -287,11 +297,20 @@ public abstract class User implements dbModify {
 		
 		preparedStatement.executeUpdate();
 		
-		} catch(Exception ex){
+		} catch(SQLException ex){
 			
 			ex.printStackTrace();
 			
+		} catch(Exception ex) {
+			
+			ex.printStackTrace();
+			
+		} finally {
+			
+			connection.close();
+			
 		}
+		
 	}
 	
 	public void delete() throws ClassNotFoundException, SQLException{

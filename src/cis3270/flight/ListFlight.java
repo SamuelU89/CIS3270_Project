@@ -3,10 +3,12 @@ package cis3270.flight;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+
 import javax.swing.*;
 
-public class ListFlight {
+public class ListFlight extends Flight{
 
+	private PreparedStatement preparedStatement;
 	public JFrame fFrame;
 	
 	/**
@@ -15,7 +17,7 @@ public class ListFlight {
 	public ListFlight() {
 		initialize();
 	}
-
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -29,6 +31,9 @@ public class ListFlight {
 		book.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
+				
+				
+				
 			
 			}
 		});
@@ -45,9 +50,6 @@ public class ListFlight {
 			public void actionPerformed(ActionEvent e) {
 				
 				fFrame.setVisible(false);
-			
-				
-				
 			
 			}
 		});
@@ -106,11 +108,37 @@ public class ListFlight {
 		fFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fFrame.getContentPane().setLayout(null);
 		
-		
-		
-		
+	}
 	
+	public void bookFlight() 
+			throws SQLException, ClassNotFoundException{
 		
+		Connection connection = initializeDB();
+		
+		try{
+			String queryString = "insert into Flight(idFlight, username)"
+					+ "values(?,?)";
+			
+			preparedStatement = connection.prepareStatement(queryString);
+			
+			preparedStatement.setString(1, Integer.parseInt(enterFlightNum.getText());
+			preparedStatement.setString(2, c1.getUsername());
+			
+			preparedStatement.executeUpdate();
+			
+			} catch(SQLException ex){
+				
+				ex.printStackTrace();
+				
+			} catch(Exception ex) {
+				
+				ex.printStackTrace();
+				
+			} finally {
+				
+				connection.close();
+				
+			}
 		
 		
 		

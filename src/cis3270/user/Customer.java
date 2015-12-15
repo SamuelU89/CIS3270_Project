@@ -1,6 +1,12 @@
 package cis3270.user;
 
 public class Customer extends User {
+	
+	public Customer(){
+		
+		super();
+		
+	};
 
 	public Customer(String firstName, String lastName, String address, String state, int zip, String email,
 			int ssn, String securityQuestion, String securityAnswer, String username, String password, int admin) {

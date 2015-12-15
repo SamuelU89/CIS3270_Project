@@ -11,7 +11,6 @@ import cis3270.flight.ListFlight;
 public class MainUI extends JFrame{
 
 	public JFrame mainUI;
-	private JButton mainMenu = new JButton("Main Menu");
 	private JButton listFlights = new JButton("List Flight");
 	private JButton myFlights = new JButton("My Flights");
 	private JButton logout = new JButton("Logout");
@@ -25,9 +24,6 @@ public class MainUI extends JFrame{
 	private void initialize() {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new GridLayout(1,2));
-		
-		mainPanel.add(mainMenu);
-		mainMenu.setPreferredSize(new Dimension(200, 80));
 		
 		mainPanel.add(listFlights);
 		listFlights.setPreferredSize(new Dimension(200, 80));
@@ -75,6 +71,27 @@ public class MainUI extends JFrame{
 		
 		mainPanel.add(addUpdateFlight);
 		addUpdateFlight.setPreferredSize(new Dimension(200, 80));
+		addUpdateFlight.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				FlightForm window;
+				
+				try {
+				/**
+				 * This is running the FlightForm page from cis3270.gui.FlightForm;
+				 * @Samuel U
+				 */
+					window = new FlightForm();
+					window.fForm.setVisible(true);
+					mainUI.setVisible(false);
+				
+				} catch (Exception ex) {
+					ex.printStackTrace();
+					
+				}	
+				
+			}
+		});
 		
 		JPanel mainPanel2 = new JPanel();
 		
