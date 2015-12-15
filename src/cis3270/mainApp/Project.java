@@ -13,6 +13,9 @@ public class Project {
 	
 	public static void main(String[] args) {
 		
+		Splash splash = new Splash("C:\\Users\\xakai77x\\workspace\\cis3270_Project\\image\\splash.jpg", new JFrame());
+		splash.setVisible(true);
+		
 		Login window;
 		
 		try {

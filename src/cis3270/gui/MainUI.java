@@ -91,31 +91,31 @@ public class MainUI extends JFrame{
 			}
 		});
 		
-		
-		mainPanel.add(addUpdateFlight);
-		addUpdateFlight.setPreferredSize(new Dimension(200, 80));
-		addUpdateFlight.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				FlightForm window;
-				
-				try {
-				/**
-				 * This is running the FlightForm page from cis3270.gui.FlightForm;
-				 * @Samuel U
-				 */
-					window = new FlightForm(c1);
-					window.fForm.setVisible(true);
-					mainUI.setVisible(false);
-				
-				} catch (Exception ex) {
-					ex.printStackTrace();
+		if(c1.getAdmin() == 1) {
+			mainPanel.add(addUpdateFlight);
+			addUpdateFlight.setPreferredSize(new Dimension(200, 80));
+			addUpdateFlight.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+	
+					FlightForm window;
 					
-				}	
-				
-			}
-		});
-		
+					try {
+					/**
+					 * This is running the FlightForm page from cis3270.gui.FlightForm;
+					 * @Samuel U
+					 */
+						window = new FlightForm(c1);
+						window.fForm.setVisible(true);
+						mainUI.setVisible(false);
+					
+					} catch (Exception ex) {
+						ex.printStackTrace();
+						
+					}	
+					
+				}
+			});
+		}
 		JPanel mainPanel2 = new JPanel();
 		
 		JPanel mainPanelUI = new JPanel();

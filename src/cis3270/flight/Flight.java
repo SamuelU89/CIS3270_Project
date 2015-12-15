@@ -31,8 +31,8 @@ public class Flight {
 		setIdPlane(idPlane);
 		setFlightFrom(flightFrom);
 		setFlightTo(flightTo);
-		//setFlightDeparture(flightDeparture);
-		//setFlightArrival(flightArrival);
+		setFlightDeparture(flightDeparture);
+		setFlightArrival(flightArrival);
 		
 	}
 	
@@ -138,8 +138,8 @@ public class Flight {
 		preparedStatement.setInt(2, getIdPlane());
 		preparedStatement.setString(3, getFlightFrom());
 		preparedStatement.setString(4, getFlightTo());
-		//preparedStatement.setTimestamp(5, getFlightDeparture());
-		//preparedStatement.setString(6, getFlightArrival());
+		preparedStatement.setTimestamp(5, getFlightDeparture());
+		preparedStatement.setTimestamp(6, getFlightArrival());
 		
 		preparedStatement.executeUpdate();
 		

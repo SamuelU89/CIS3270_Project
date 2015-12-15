@@ -106,6 +106,7 @@ public class NewRegister {
 				try {
 					
 					c1.add();
+					JOptionPane.showMessageDialog(null, "Registered Successfully");
 					
 				} catch(Exception ex) {
 					

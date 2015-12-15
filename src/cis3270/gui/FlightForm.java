@@ -2,7 +2,11 @@ package cis3270.gui;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.*;
 
@@ -85,12 +89,32 @@ public class FlightForm extends Flight {
 		addFlight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+				SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+				
+				Date parsedDate;
+				Date parsedDate2;
+				
+				Timestamp timestamp = null;
+				Timestamp timestamp2 = null;
+				try {
+					parsedDate = dateFormat.parse(enterDepart.getText());
+					parsedDate2 = dateFormat.parse(enterArrive.getText());
+					
+					timestamp = new java.sql.Timestamp(parsedDate.getTime());
+					timestamp2 = new java.sql.Timestamp(parsedDate2.getTime());
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				Flight f1 =  new Flight(Integer.parseInt(enterFID.getText()), Integer.parseInt(enterPID.getText()), enterFTo.getText(), 
-						enterFFrom.getText(), enterDepart.getTimestamp(), enterArrive.getTimestamp());
+						enterFFrom.getText(), timestamp, timestamp2);
 				
 				try {
 					
 					f1.add();
+					JOptionPane.showMessageDialog(null, "Successfully added");
 					
 				} catch(SQLException ex){
 					
